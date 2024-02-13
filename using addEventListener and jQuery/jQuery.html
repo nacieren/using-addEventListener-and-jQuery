@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>jQuery</title>
+  <style>
+    body {
+      text-align: center;
+    }
+    
+    .container {
+      margin-top: 100px;
+    }
+    
+    .button {
+      width: 100px;
+      height: 30px;
+      margin: 5px;
+      border: 1px solid #000;
+      cursor: pointer;
+    }
+    
+    .oliveButton {
+      background-color: grey;
+    }
+    
+    .orangeButton {
+      background-color: grey;
+    }
+
+    .magentaButton {
+      background-color: grey;
+    }
+    
+    .color-option {
+      text-decoration: underline;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>Working with form elements using jQuery</h2>
+    <div style="display: flex; flex-direction: column; align-items: center;">
+      <div style="margin-bottom: 10px;">
+        <label>Radio Buttons:</label>
+        <input type="radio" name="color" value="red" onchange="changeColor(this.value)">Red
+        <input type="radio" name="color" value="cyan" onchange="changeColor(this.value)">Cyan
+        <input type="radio" name="color" value="brown" onchange="changeColor(this.value)">Brown
+      </div>
+      <div style="margin-bottom: 10px;">
+        <label>Selection Menu:</label>
+        <br>
+        <select id="colorSelect" onchange="changeColor(this.value)">
+          <option value="">---Choose color---</option>
+          <option value="purple">Purple</option>
+          <option value="gold">Gold</option>
+          <option value="white">White</option>
+        </select>
+      </div>
+      <p>Input a color name or a hexadecimal value</p>
+      <div style="margin-bottom: 10px;">
+        <label>Text Box:</label>
+        <br>
+        <input type="text" id="colorInput" oninput="changeColor(this.value)">
+      </div>
+      <div style="margin-bottom: 10px;">
+        <label>Checkboxes:</label>
+        <br>
+        <input type="checkbox" name="color" value="black" onchange="changeColor(this.value)">Color 1
+        <input type="checkbox" name="color" value="green" onchange="changeColor(this.value)">Color 2
+        <input type="checkbox" name="color" value="blue" onchange="changeColor(this.value)">Color 3
+      </div>
+      <div style="margin-bottom: 10px;">
+        <div class="button oliveButton" onclick="changeColor('olive')">Olive</div>
+        <div class="button orangeButton" onclick="changeColor('orange')">Orange</div>
+        <div class="button magentaButton" onclick="changeColor('magenta')">Magenta</div>
+      </div>
+      <div>
+        <span class="color-option" onclick="changeColor('lime')">Lime</span>
+        <span class="color-option" onclick="changeColor('aqua')">Aqua</span>
+        <span class="color-option" onclick="changeColor('Khaki')">Khaki</span>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    function changeColor(color) {
+      document.body.style.backgroundColor = color;
+      
+      var radios = document.getElementsByName("color");
+      for (var i = 0; i < radios.length; i++) {
+        radios[i].checked = false;
+      }
+      
+      var selectElement = document.getElementById("colorSelect");
+      selectElement.selectedIndex = 0;
+      
+      var inputElement = document.getElementById("colorInput");
+      inputElement.value = color;
+      
+      var checkboxes = document.getElementsByName("color");
+      for (var i = 0; i < checkboxes.length; i++) {
+        checkboxes[i].checked = false;
+      }
+    }
+  </script>
+</body>
+</html>

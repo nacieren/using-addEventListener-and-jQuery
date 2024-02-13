@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>addEventListener</title>
+  <style>
+    body {
+      text-align: center;
+    }
+    
+    .container {
+      margin-top: 100px;
+    }
+    
+    .button {
+      width: 100px;
+      height: 30px;
+      margin: 5px;
+      border: 1px solid #000;
+      cursor: pointer;
+    }
+    
+    .oliveButton {
+      background-color: grey;
+    }
+    
+    .orangeButton {
+      background-color: grey;
+    }
+
+    .magentaButton {
+      background-color: grey;
+    }
+    
+    .color-option {
+      text-decoration: underline;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>Working with form elements using addEventListener</h2>
+    <div style="display: flex; flex-direction: column; align-items: center;">
+      <div style="margin-bottom: 10px;">
+        <label>Radio Buttons:</label>
+        <input type="radio" name="color" value="red">Red
+        <input type="radio" name="color" value="cyan">Cyan
+        <input type="radio" name="color" value="brown">Brown
+      </div>
+      <div style="margin-bottom: 10px;">
+        <label>Selection Menu:</label>
+        <br>
+        <select id="colorSelect">
+          <option value="">---Choose color---</option>
+          <option value="purple">Purple</option>
+          <option value="gold">Gold</option>
+          <option value="white">White</option>
+        </select>
+      </div>
+      <p>Input a color name or a hexadecimal value</p>
+      <div style="margin-bottom: 10px;">
+        <label>Text Box:</label>
+        <br>
+        <input type="text" id="colorInput">
+      </div>
+      <div style="margin-bottom: 10px;">
+        <label>Checkboxes:</label>
+        <br>
+        <input type="checkbox" name="color" value="black">Color 1
+        <input type="checkbox" name="color" value="green">Color 2
+        <input type="checkbox" name="color" value="blue">Color 3
+      </div>
+      <div style="margin-bottom: 10px;">
+        <div class="button oliveButton">Olive</div>
+        <div class="button orangeButton">Orange</div>
+        <div class="button magentaButton">Magenta</div>
+      </div>
+      <div>
+        <span class="color-option">Lime</span>
+        <span class="color-option">Aqua</span>
+        <span class="color-option">Khaki</span>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      var radioButtons = document.getElementsByName('color');
+      radioButtons.forEach(function(radio) {
+        radio.addEventListener('change', function() {
+          changeColor(this.value);
+        });
+      });
+
+      var selectElement = document.getElementById('colorSelect');
+      selectElement.addEventListener('change', function() {
+        changeColor(this.value);
+      });
+
+      var inputElement = document.getElementById('colorInput');
+      inputElement.addEventListener('input', function() {
+        changeColor(this.value);
+      });
+
+      var checkboxes = document.getElementsByName('color');
+      checkboxes.forEach(function(check) {
+        check.addEventListener('change', function() {
+          changeColor(this.value);
+        });
+      });
+
+      var buttons = document.querySelectorAll('.button');
+      buttons.forEach(function(button) {
+        button.addEventListener('click', function() {
+          var color = this.textContent.trim().toLowerCase();
+          changeColor(color);
+        });
+      });
+
+      var colorOptions = document.querySelectorAll('.color-option');
+      colorOptions.forEach(function(option) {
+        option.addEventListener('click', function() {
+          var color = this.textContent.trim().toLowerCase();
+          changeColor(color);
+        });
+      });
+    });
+
+    function changeColor(color) {
+      document.body.style.backgroundColor = color;
+      
+      var radios = document.getElementsByName("color");
+      radios.forEach(function(radio) {
+        radio.checked = false;
+      });
+      
+      var selectElement = document.getElementById("colorSelect");
+      selectElement.selectedIndex = 0;
+      
+      var inputElement = document.getElementById("colorInput");
+      inputElement.value = color;
+      
+      var check = document.getElementsByName("color");
+      check.forEach(function(check) {
+        check.checked = false;
+      });
+    }
+  </script>
+</body>
+</html>
